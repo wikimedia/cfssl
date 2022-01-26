@@ -73,7 +73,7 @@ func TestBundleAuthSign(t *testing.T) {
 	testProvider, _ = auth.New(testKey, nil)
 	s := NewAuthServer("1.1.1.1", nil, testProvider)
 	testRequest := []byte(`testing 1 2 3`)
-	as, err := s.BundleAuthSign(testRequest, testAD, testProvider)
+	_, as, err := s.BundleAuthSign(testRequest, testAD, testProvider)
 	if as != nil || err == nil {
 		t.Fatal("expected error with auth sign function")
 	}
@@ -99,7 +99,7 @@ func TestSign(t *testing.T) {
 
 func TestBundleSign(t *testing.T) {
 	s := NewServer("1.1.1.1")
-	sign, err := s.BundleSign([]byte{5, 5, 5, 5})
+	_, sign, err := s.BundleSign([]byte{5, 5, 5, 5})
 	if sign != nil || err == nil {
 		t.Fatalf("expected error with sign function")
 	}
